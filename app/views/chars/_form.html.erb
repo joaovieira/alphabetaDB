@@ -1,0 +1,29 @@
+<%= form_for(@char) do |f| %>
+  <% if @char.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@char.errors.count, "error") %> prohibited this char from being saved:</h2>
+
+      <ul>
+      <% @char.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :script %><br />
+    <%= f.select :script, Script.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select Script'} %><br />
+  </div>
+  <div class="field">
+    <%= f.label :sound %><br />
+    <%= f.number_field :sound %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

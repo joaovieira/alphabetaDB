@@ -1,0 +1,29 @@
+<%= form_for(@glyph) do |f| %>
+  <% if @glyph.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@glyph.errors.count, "error") %> prohibited this glyph from being saved:</h2>
+
+      <ul>
+      <% @glyph.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.text_area :image %>
+  </div>
+  <div class="field">
+    <%= f.label :beginDate %><br />
+    <%= f.date_select :beginDate %>
+  </div>
+  <div class="field">
+    <%= f.label :endDate %><br />
+    <%= f.date_select :endDate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

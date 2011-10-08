@@ -1,0 +1,27 @@
+<h1>Listing glyphs</h1>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Begintime</th>
+    <th>Endtime</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @glyphs.each do |glyph| %>
+  <tr>
+    <td><%= glyph.image %></td>
+    <td><%= glyph.beginTime %></td>
+    <td><%= glyph.endTime %></td>
+    <td><%= link_to 'Show', glyph %></td>
+    <td><%= link_to 'Edit', edit_glyph_path(glyph) %></td>
+    <td><%= link_to 'Destroy', glyph, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Glyph', new_glyph_path %>

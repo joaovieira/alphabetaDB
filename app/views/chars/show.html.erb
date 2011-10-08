@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @char.name %>
+</p>
+
+<p>
+  <b>Script:</b>
+  <%= @char.script.name %>
+</p>
+
+<p>
+  <b>Soundvalue:</b>
+  <%= @char.sound.sound %>
+</p>
+
+
+<%= link_to 'Edit', edit_char_path(@char) %> |
+<%= link_to 'Back', chars_path %>

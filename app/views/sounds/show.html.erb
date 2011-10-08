@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sound.name %>
+</p>
+
+<p>
+  <b>Symbol:</b>
+  <%= @sound.symbol %>
+</p>
+
+<p>
+  <b>Sound:</b>
+  <%= @sound.sound %>
+</p>
+
+
+<%= link_to 'Edit', edit_sound_path(@sound) %> |
+<%= link_to 'Back', sounds_path %>

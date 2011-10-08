@@ -1,0 +1,27 @@
+<h1>Listing chars</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Script</th>
+    <th>Sound</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @chars.each do |char| %>
+  <tr>
+    <td><%= char.name %></td>
+    <td><%= char.script.name %></td>
+    <td><%= char.sound.symbol %></td>
+    <td><%= link_to 'Show', char %></td>
+    <td><%= link_to 'Edit', edit_char_path(char) %></td>
+    <td><%= link_to 'Destroy', char, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Char', new_char_path %>

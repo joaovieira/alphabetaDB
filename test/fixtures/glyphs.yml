@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  image: MyText
+  beginTime: 2011-10-06 12:35:35
+  endTime: 2011-10-06 12:35:35
+
+two:
+  image: MyText
+  beginTime: 2011-10-06 12:35:35
+  endTime: 2011-10-06 12:35:35

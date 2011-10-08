@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  author: MyString
+  publisher: MyString
+  title: MyString
+  year: 1
+  url: MyString
+
+two:
+  author: MyString
+  publisher: MyString
+  title: MyString
+  year: 1
+  url: MyString

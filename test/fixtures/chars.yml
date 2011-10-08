@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  script: 1
+  soundValue: 1
+
+two:
+  name: MyString
+  script: 1
+  soundValue: 1
