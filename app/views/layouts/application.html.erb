@@ -2,13 +2,65 @@
 <html>
 <head>
   <title>AlphabetaDB</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "blueprint/screen", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "blueprint/print", :media => "print" %>
+<!--[if lt IE 8]>
+  <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
+<![endif]-->
+  <%= stylesheet_link_tag    "application"%>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div id="wrapper">
+    <div id="wrapper-inner">
+        <div id="header">
+            <div id="header-inner">
+                <div id="language-bar">
+                    <div id="language-select">
+                        EN | MG | PT
+                    </div>
+                </div>
+                <div id="site-title">
+                    <h1 class="title">Alphabet(a)DB</h1>
+                    A charset, script and IPA community database.
+                </div>
+            </div>
+            <div id="top-bar">
+                <div id="menu">
+                  <ul>
+                    <li>Menu1</li>
+                    <li>Menu2</li>
+                  </ul>
+                </div>
+                <div id="search">
+                    <input type=search results=5 autosave=some_unique_value placeholder=Search... name=s>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="breadcrumb">
+                Breadcrumb &raquo; goes &raquo; here
+            </div>
+            <div id="bottom-content">
+                <div id="main-wrapper">
+                    <div id="main">
+                        Main goes here.
+                        <%= yield %>
+                    </div>
+                </div>
+                <div id="side-bar-wrapper">
+                    <div id="side-bar">
+                        Side bar goes here.
+                        <%= yield :side_bar %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+  Footer goes here.
+</div>
 </body>
 </html>

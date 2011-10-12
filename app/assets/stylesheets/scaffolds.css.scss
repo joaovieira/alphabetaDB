@@ -1,6 +1,9 @@
+/* Layout */
+html, body {
+  height: 100%; }
+
 body {
-  background-color: #fff;
-  color: #333;
+  background: url(/assets/vertical-gradient.png) repeat-x 0% 0%;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px; }
@@ -27,30 +30,109 @@ div {
   &.field, &.actions {
     margin-bottom: 10px; } }
 
-#notice {
-  color: green; }
+#wrapper {
+  background: url(/assets/highlight-bg.png) no-repeat 50% 0%; }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table; }
+#wrapper-inner {
+  background: white;
+  margin: 0px auto;
+  width: 1000px;
+  -moz-box-shadow: 0 0 9px 4px #666;
+  -webkit-box-shadow: 0 0 7px 3px #666;
+  box-shadow: 0 0 9px 4px #666; }
 
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff; }
-  ul li {
-    font-size: 12px;
-    list-style: square; } }
+#header {
+  background: white url(/assets/banner-opt.png) no-repeat 0% 0%;
+  height: 150px;
+  position: relative; }
+
+#logo {
+  float: left; }
+
+#top-bar {
+  background: url(/assets/trans-square.png) repeat 0% 0%;
+  position: absolute;
+  bottom: 0px;
+  width: 100%; }
+
+#content {}
+
+#breadcrumb {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ccc)) repeat-x 0% 0%;
+  margin: auto;
+  overflow: visible;
+  padding: 3px 20px;
+  font-size: 10px; }
+
+#bottom-content {
+  background: white url(/assets/content-top-shwd.png) repeat-x 0% 0%;
+  overflow: auto;
+  width: 100%;
+  padding: 30px 0px; }
+
+#main-wrapper, #side-bar-wrapper {
+  float: left;
+  min-height: 400px; }
+
+#main-wrapper {
+  margin-left: 0px;
+  margin-right: -720px;
+  width: 690px;
+  padding: 0px 10px 0px 20px; }
+
+#side-bar-wrapper {
+  background: white url(/assets/sidebar-line.png) repeat-y 0% 0%;
+  margin-left: 720px;
+  margin-right: -1000px;
+  width: 250px;
+  padding: 0px 20px 0px 10px; }
+
+#side-bar {}
+
+#footer {
+  background: white;
+  height:100px; }
+
+#language-bar {
+  overflow: auto;
+  width: 100%;}
+
+#language-select {
+  float: right;
+  padding: 7px 15px; }
+
+#menu {
+  float: left;
+  padding: 6px 20px; }
+
+#menu ul {
+  padding: 0px;
+  margin: 0px; }
+
+#menu ul li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 10px; }
+
+#search {
+  float: right;
+  padding: 3px 15px; }
+
+/* Styling */
+input[type=search] {
+  cursor: pointer;
+  font-size: 17px;
+}
+
+#site-title {
+  position: absolute;
+  top: 42px;
+  left: 20px;
+  font-family: Myriad Pro; }
+
+#site-title .title {
+  font-weight: bold;
+  font-size: 42px;
+  color: #506a7a;
+  line-height: 0.9;
+  margin-bottom: 0px; }
