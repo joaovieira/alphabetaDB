@@ -11,18 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_area :image %>
-  </div>
-  <div class="field">
-    <%= f.label :beginDate %><br />
-    <%= f.date_select :beginDate %>
-  </div>
-  <div class="field">
-    <%= f.label :endDate %><br />
-    <%= f.date_select :endDate %>
-  </div>
+  <table class="edit_form">
+    <% if @glyph.unicode %>
+        <tr>
+            <td class="form_header"><%= f.label t('glyph.self') %></td>
+            <td><%= unicode_tag @glyph.unicode, :type => 'glyph' %></td>
+        </tr>
+    <% end %>
+
+    <tr>
+      <td class="form_header"><%= f.label :unicode %></td>
+      <td><%= f.text_field :unicode %></td>
+    </tr>
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

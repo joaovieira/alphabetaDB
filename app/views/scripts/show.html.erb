@@ -1,10 +1,77 @@
-<p id="notice"><%= notice %></p>
+<h1><i><%= @script.name %></i></h1>
 
 <p>
-  <b>Name:</b>
-  <%= @script.name %>
+  <%= simple_format @script.description %>
 </p>
 
+<p>
+  <b><%= t('date.begin') %>:</b>
+  <%= @script.beginDate %>
+</p>
 
-<%= link_to 'Edit', edit_script_path(@script) %> |
-<%= link_to 'Back', scripts_path %>
+<p>
+  <b><%= t('date.end') %>:</b>
+  <%= @script.endDate %>
+</p>
+
+<div class="toggle">
+    <h2 class="trigger"><a href="#"><%= t('char.plural') %></a></h2>
+    <div class="toggle_container toggle_block" style="display:none;">
+        <table class="pretty">
+          <tr>
+            <th><%= t('symbol') %></th>
+            <th><%= t('name') %></th>
+            <th><%= t('sound_value') %></th>
+            <th><%= t('parent') %></th>
+          </tr>
+        <% @script.chars.each do |char| %>
+          <tr>
+            <td><%= unicode_tag char.glyph.unicode, :type => 'glyph' %></td>
+            <td><%= link_to char.name.upcase, char %></td>
+            <td><% char.sounds.each do |s| %>
+                  <%= unicode_tag(s.symbol, :type => 'sound') + (',' unless s == char.sounds.last) %>
+                <% end %>
+            </td>
+            <td><% if char.parent %>
+                  <%= unicode_tag char.parent.glyph.unicode, :type => 'glyph' %>
+                <% else %>
+                  <%= "-" %>
+                <%end%>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+    </div>
+</div>
+
+<div class="toggle">
+    <h2 class="trigger"><a href="#"><%= t('script.family') %></a></h2>
+    <div class="toggle_container toggle_block" style="display:none;">
+      <div id="parent-systems">
+            <b><%= t('script.direct_systems') + '/' + t('origin') %>:</b>
+            <% if @ancestors.empty? %>
+                <%= t('none') %>
+            <% else %>
+                <% @ancestors.each do |script| %>
+                    <%= link_to script.name, script %><%= ', ' unless @ancestors.last == script %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div id="child-systems">
+            <b><%= t('script.children') %>:</b>
+            <% if @children.empty? %>
+                <%= t('none') %>
+            <% else %>
+                <% @children.each do |script| %>
+                    <%= link_to script.name, script %><%= ', ' unless @children.last == script %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<% if user_signed_in? %>
+    <%= link_to t('edit'), edit_script_path(@script) %> |
+<% end %>
+<%= link_to t('back'), :back %>

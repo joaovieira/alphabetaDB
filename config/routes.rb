@@ -1,9 +1,15 @@
 AlphabetaDB::Application.routes.draw do
+
+  devise_for :users do
+    get "sign_out", :to => "devise/sessions#destroy"
+    get "sign_up", :to => "devise/registrations#edit"
+  end
+
   resources :references
 
   resources :sounds
 
-  resources :glyphs
+  resources :glyphs, :except => [:show]
 
   resources :scripts
 
@@ -56,9 +62,12 @@ AlphabetaDB::Application.routes.draw do
   #     resources :products
   #   end
 
+  # config/routes.rb
+  match '/:locale' => 'chars#home'
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'chars#index'
+  root :to => 'chars#home'
 
   # See how all your routes lay out with "rake routes"
 

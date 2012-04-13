@@ -1,0 +1,37 @@
+<h1 class="big"><%= t('home.title') %></h1>
+
+<div id="intro">
+    <p>Alphabet(a)DB is a complete database of the Characters that made History. You can follow the evolution of them through the different
+      ages and Scripts, get to know their glyphs, their origin and how they're used in the phonetic alphabet.</p>
+
+    <p>This is a community build database which means its maintainable world-wide, with the information being available to
+      everyone in a simple and effective way. If you want to contribute just <%= link_to t('sign.up'), new_user_registration_path %>.</p>
+</div>
+
+<hr class="horizontal-line"/>
+
+<table id="features">
+  <tr>
+    <td>
+      <h2>Charset</h2>
+      <p>A collection of characters since the start of the times. From the Phoenician to the Latin, with unicoded glyph representations and sound values.</p>
+    </td>
+    <td>
+      <h2>Scripts</h2>
+      <p>The whole family of scripts within its context and time space. Here you can find the evolution of every script and alphabet.</p>
+    </td>
+    <td>
+      <h2>IPA</h2>
+      <p>List of sounds and information from the <a href="http://web.uvic.ca/ling/resources/ipa/charts/IPAlab/IPAlab.htm">International Phonetic Alphabet</a> that makes every character sound value &ndash; in Unicode.</p>
+    </td>
+  </tr>
+</table>
+
+<hr class="horizontal-line"/>
+
+<div id="start_row">
+    <%= link_to chars_path,  :id => "start_button" do %>
+      <strong>Go!</strong>
+      Start Browsing Alphabet(a)DB
+    <% end %>
+</div>

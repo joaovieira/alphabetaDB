@@ -1,0 +1,25 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "name", t('name') %></th>
+    <th><%= t('symbol') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sounds.each do |sound| %>
+  <tr>
+    <td><%= link_to sound.name, sound %></td>
+    <td><%= unicode_tag sound.symbol, :type => 'sound', :id => sound.id %></td>
+    <% if user_signed_in? %>
+        <td><%= link_to image_tag('/assets/page_white_edit.png'), edit_sound_path(sound), :title => 'Edit' %></td>
+        <td><%= link_to image_tag('/assets/delete.png'), sound, confirm: 'Are you sure?', method: :delete, :title => 'Delete' %></td>
+    <% else %>
+        <td></td>
+        <td></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @sounds %>

@@ -1,0 +1,46 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "scripts.name", t('script.self') %></th>
+    <th><%= t('glyph.self') %></th>
+    <th><%= sortable "name", t('name') %></th>
+    <th><%= t('parent') %></th>
+    <th><%= t('sound.value') %></th>
+    <th class="table_option"></th>
+    <th class="table_option"></th>
+  </tr>
+
+<% @chars.each do |char| %>
+  <tr>
+    <td><i><%= link_to char.script.name, char.script %></i></td>
+    <td><%= unicode_tag char.glyph.unicode, :type => 'glyph', :selector => true %>
+        <div class="overlay" style="display:none">
+            <%= render :partial => 'glyphs/glyph', :object => char.glyph %>
+        </div>
+    </td>
+    <td><%= link_to char.name.upcase, char %></td>
+    <td><% if char.parent %>
+          <%= unicode_tag char.parent.glyph.unicode, :type => 'glyph', :selector => true %>
+          <div class="overlay" style="display:none">
+            <%= render :partial => 'glyphs/glyph', :object => char.parent.glyph %>
+        </div>
+        <% else %>
+          <%= "-" %>
+        <%end%>
+    </td>
+    <td><% char.sounds.each do |sound| %>
+          <%= link_to unicode_tag(sound.symbol, :type => 'sound') + (',' unless sound == char.sounds.last), sound %>
+        <% end %>
+    </td>
+    <% if user_signed_in? %>
+        <td><%= link_to image_tag('/assets/page_white_edit.png'), edit_char_path(char), :title => 'Edit' %></td>
+        <td><%= link_to image_tag('/assets/delete.png'), char, confirm: 'Are you sure?', method: :delete, :title => 'Delete' %></td>
+    <% else %>
+        <td></td>
+        <td></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @chars %>

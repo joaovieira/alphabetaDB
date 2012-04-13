@@ -11,18 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :symbol %><br />
-    <%= f.text_field :symbol %>
-  </div>
-  <div class="field">
-    <%= f.label :sound %><br />
-    <%= f.text_area :sound %>
-  </div>
+  <table class="edit_form">
+    <tr>
+      <td class="form_header"><%= f.label t('name') %></td>
+      <td><%= f.text_field :name, :size => 30 %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('description') %></td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('symbol') %></td>
+      <td><%= f.text_field :symbol %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('sound.file_url') %></td>
+      <td><%= f.text_field :file, :size => 80 %></td>
+    </tr>
+
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

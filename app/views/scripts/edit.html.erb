@@ -1,6 +1,6 @@
-<h1>Editing script</h1>
+<h1><%= t('script.edit') %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @script %> |
-<%= link_to 'Back', scripts_path %>
+<%= link_to t('show'), @script %> |
+<%= link_to t('back'), :back %>

@@ -1,0 +1,25 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="pretty">
+  <tr>
+    <th><%= t('glyph.self') %></th>
+    <th><%= sortable "unicode" %></th>
+    <th class="table_option"></th>
+    <th class="table_option"></th>
+  </tr>
+
+<% @glyphs.each do |glyph| %>
+  <tr>
+    <td><%= unicode_tag(glyph.unicode, :type => 'glyph') %></td>
+    <td><%= glyph.unicode %></td>
+    <% if user_signed_in? %>
+        <td><%= link_to image_tag('/assets/page_white_edit.png'), edit_glyph_path(glyph), :title => 'Edit' %></td>
+        <td><%= link_to image_tag('/assets/delete.png'), glyph, confirm: 'Are you sure?', method: :delete, :title => 'Delete' %></td>
+    <% else %>
+        <td></td>
+        <td></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @glyphs %>

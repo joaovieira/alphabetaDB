@@ -1,27 +1,3 @@
-<h1>Listing sounds</h1>
+<h1><%= t('sound.list') %></h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Symbol</th>
-    <th>Sound</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sounds.each do |sound| %>
-  <tr>
-    <td><%= sound.name %></td>
-    <td><%= sound.symbol %></td>
-    <td><%= sound.sound %></td>
-    <td><%= link_to 'Show', sound %></td>
-    <td><%= link_to 'Edit', edit_sound_path(sound) %></td>
-    <td><%= link_to 'Destroy', sound, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Sound', new_sound_path %>
+<div id="sounds"><%= render 'sounds' %></div>

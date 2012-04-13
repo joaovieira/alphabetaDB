@@ -1,12 +1,18 @@
 class ScriptsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+  before_filter :authenticate_user!, :only => [:edit, :new, :create, :update, :destroy]
+
   # GET /scripts
   # GET /scripts.json
   def index
-    @scripts = Script.all
+    add_breadcrumb I18n.t("script.plural"), :scripts_path
+
+    @scripts = Script.order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @scripts }
+      format.js
     end
   end
 
@@ -14,6 +20,20 @@ class ScriptsController < ApplicationController
   # GET /scripts/1.json
   def show
     @script = Script.find(params[:id])
+
+    @ancestors = []
+    @children = []
+    @script.chars.each do |char|
+      if char.parent
+        @ancestors << char.parent.script unless @ancestors.include?(char.parent.script)
+      end
+      char.children.each do |child|
+        @children << child.script unless @children.include?(child.script)
+      end
+    end
+
+    add_breadcrumb I18n.t("script.plural"), :scripts_path
+    add_breadcrumb @script.name, script_path(@script)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,8 +44,8 @@ class ScriptsController < ApplicationController
   # GET /scripts/new
   # GET /scripts/new.json
   def new
+    add_breadcrumb I18n.t("script.plural"), :scripts_path
     @script = Script.new
-    @other_scripts = Script.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +56,9 @@ class ScriptsController < ApplicationController
   # GET /scripts/1/edit
   def edit
     @script = Script.find(params[:id])
-    @other_scripts = Script.where("id <> ?", @script.id)
+
+    add_breadcrumb I18n.t("script.plural"), :scripts_path
+    add_breadcrumb @script.name, script_path(@script)
   end
 
   # POST /scripts
@@ -81,5 +103,15 @@ class ScriptsController < ApplicationController
       format.html { redirect_to scripts_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def sort_column
+    %w[name].include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

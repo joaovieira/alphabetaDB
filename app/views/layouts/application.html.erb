@@ -7,7 +7,7 @@
 <!--[if lt IE 8]>
   <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
 <![endif]-->
-  <%= stylesheet_link_tag "scaffold"%>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -18,41 +18,80 @@
             <div id="header-inner">
                 <div id="language-bar">
                     <div id="language-select">
-                        EN | MG | PT
+                        <%= link_to 'EN', url_for( :locale => 'en' ) %> |
+                        <%= link_to 'HU', url_for( :locale => 'hu' ) %> |
+                        <%= link_to 'PT', url_for( :locale => 'pt' ) %>
                     </div>
                 </div>
                 <div id="site-title">
-                    <h1 class="title">Alphabet(a)DB</h1>
+                    <a href="<%= root_url %>">
+                      <h1 class="title">Alphabet(a)DB</h1>
+                    </a>
                     A charset, script and IPA community database.
                 </div>
             </div>
             <div id="top-bar">
                 <div id="menu">
                   <ul>
-                    <li>Menu1</li>
-                    <li>Menu2</li>
+                    <li><%= link_to t('char.plural'), chars_path %></li>
+                    <li><%= link_to t('script.plural'), scripts_path %></li>
+                    <li><%= link_to t('sound.plural'), sounds_path %></li>
                   </ul>
                 </div>
-                <div id="search">
+                <div id="search_top">
                     <input type=search results=5 autosave=some_unique_value placeholder=Search... name=s>
                 </div>
             </div>
         </div>
         <div id="content">
             <div id="breadcrumb">
-                Breadcrumb &raquo; goes &raquo; here
+                <%= render_breadcrumbs :separator => ' » ' %>
             </div>
             <div id="bottom-content">
-                <div id="main-wrapper">
-                    <div id="main">
-                        Main goes here.
-                        <%= yield %>
+                <div id="main-container">
+                    <div id="main-wrapper">
+                        <% if flash[:alert] %>
+                            <p class="alert"><%= flash[:alert] %></p>
+                        <% end %>
+                        <% if flash[:notice] %>
+                            <p class="notice"><%= flash[:notice] %></p>
+                        <% end %>
+                        <div id="main">
+                            <%= yield %>
+                        </div>
                     </div>
-                </div>
-                <div id="side-bar-wrapper">
-                    <div id="side-bar">
-                        Side bar goes here.
-                        <%= yield :side_bar %>
+                    <div id="side-bar-wrapper">
+                        <div id="side-bar">
+                          <% if !user_signed_in? %>
+                            <%= render :partial => 'devise/sessions/new' %>
+                            <%= t('new_user') + '? ' %>
+                            <%= link_to t('sign.up'), new_user_registration_path %>.
+                          <% else %>
+                            <div id="user_bar">
+                                <%= t('sign.as') + ' ' + current_user.username %>.
+                                <%= link_to t('sign.edit_account'), edit_user_registration_path %>
+                                <%= t('or') %>
+                                <%= link_to t('sign.out'), destroy_user_session_path, :method => :delete %>.
+                                <div id="user_links">
+                                    <h2><%= t('menu.question') %>?</h2>
+                                    <ul>
+                                        <li>
+                                          <span class="arrow-left">&raquo;</span>
+                                          <%= link_to t('char.add'), new_char_path %></li>
+                                        <li>
+                                          <a class="arrow-left">&raquo;</a>
+                                          <%= link_to t('script.add'), new_script_path %></li>
+                                        <li>
+                                          <a class="arrow-left">&raquo;</a>
+                                          <%= link_to t('sound.add'), new_sound_path %></li>
+                                        <li>
+                                          <a class="arrow-left">&raquo;</a>
+                                          <%= link_to t('glyph.manage'), glyphs_path %></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          <% end %>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +99,14 @@
     </div>
 </div>
 <div id="footer">
-  Footer goes here.
+  <div id="footer-inner">
+    <h4 class="title">Alphabet(a)DB</h4>
+    <div id="about">
+      Budapesti Műszaki és Gazdaságtudományi Egyetem (BME) &copy; 2011 &bull;
+      Design by <a href="www.fe.up.pt/~ei07128">João Vieira</a>
+    </div>
+  </div>
 </div>
+<div id="post-area"></div>
 </body>
 </html>

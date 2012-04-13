@@ -11,10 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+  <table class="edit_form">
+    <tr>
+      <td class="form_header"><%= f.label t('name') %></td>
+      <td><%= f.text_field :name, :size => 30 %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('description') %></td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('date.begin')%></td>
+      <td><%= f.text_field :beginDate %></td>
+    </tr>
+
+    <tr>
+      <td class="form_header"><%= f.label t('date.end') %></td>
+      <td><%= f.text_field :endDate %></td>
+    </tr>
+
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

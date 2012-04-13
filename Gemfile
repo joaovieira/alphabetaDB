@@ -18,6 +18,11 @@ end
 
 gem 'jquery-rails'
 
+gem 'ancestry'
+gem 'breadcrumbs_on_rails'
+gem 'will_paginate'
+gem 'devise'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

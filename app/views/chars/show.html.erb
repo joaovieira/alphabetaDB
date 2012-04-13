@@ -1,20 +1,56 @@
-<p id="notice"><%= notice %></p>
+<h1>
+<i><%= @char.script.name %></i>,
+<%= unicode_tag @char.glyph.unicode, :type => 'glyph' %>,
+<%= @char.name.upcase %>
+</h1>
+<div id="glyph_representation">
+    <%= render :partial => 'glyphs/glyph', :object => @char.glyph %>
+</div>
+
+<%= simple_format @char.description %>
 
 <p>
-  <b>Name:</b>
-  <%= @char.name %>
+  <b><%= t('script.self') %>:</b>
+  <%= link_to @char.script.name, @char.script %>
 </p>
 
 <p>
-  <b>Script:</b>
-  <%= @char.script.name %>
+  <b><%= t('sound.value') %>:</b>
+  <% @char.sounds.each do |s| %>
+    <%= link_to unicode_tag(s.symbol, :type => 'sound'), s %><%= ',' unless s == @char.sounds.last %>
+  <% end %>
 </p>
 
-<p>
-  <b>Soundvalue:</b>
-  <%= @char.sound.sound %>
-</p>
+<div class="toggle">
+    <h2 class="trigger"><a href="#"><%= t('char.family') %></a></h2>
+    <div class="toggle_container toggle_block" style="display:none;">
+        <div id="parent-systems">
+            <b><%= t('char.ancestors') %>:</b>
+            <% if @ancestors.empty? %>
+                <%= t('none') %>
+            <% else %>
+                <br/>
+                <ul class="tree">
+                    <%= nested_chars @ancestors %>
+                </ul>
+            <% end %>
+        </div>
 
+        <div id="child-systems">
+            <b><%= t('char.children') %>:</b>
+            <% if @children.empty? %>
+                <%= t('none') %>
+            <% else %>
+                <br/>
+                <ul class="tree">
+                    <%= nested_chars @children %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</div>
 
-<%= link_to 'Edit', edit_char_path(@char) %> |
-<%= link_to 'Back', chars_path %>
+<% if user_signed_in? %>
+    <%= link_to t('edit'), edit_char_path(@char) %> |
+<% end %>
+<%= link_to t('back'), :back %>

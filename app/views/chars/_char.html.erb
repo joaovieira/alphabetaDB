@@ -1,0 +1,9 @@
+<li class="folder closed <%= 'empty' if empty %>">
+    <a class="toggler closed <%= 'empty' if empty %>">&raquo;</a>
+    <span><a href="<%= char_url(char) %>" title="<%= t('view') + ' ' + t('char.self') %>">
+        <i><%= char.script.name %></i>,
+        <%= unicode_tag(char.glyph.unicode, :type => 'glyph') %>,
+        <%= char.name.upcase %>
+    </a>
+    </span>
+</li>

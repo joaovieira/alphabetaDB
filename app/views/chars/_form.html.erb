@@ -11,18 +11,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :script %><br />
-    <%= f.select :script, Script.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select Script'} %><br />
-  </div>
-  <div class="field">
-    <%= f.label :sound %><br />
-    <%= f.number_field :sound %>
-  </div>
+  <table class="edit_form">
+    <tr>
+      <td class="form_header"><%= f.label t('name') %></td>
+      <td><%= f.text_field :name, :size => 30 %></td>
+    </tr>
+    <tr>
+      <td class="form_header"><%= f.label t('description') %></td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+    <tr>
+      <td class="form_header"><%= f.label t('glyph.self') %></td>
+      <td><%= f.select :glyph_id,
+                       Glyph.all.collect {|p| [ unicode_tag(p.unicode, :type => 'glyph'), p.id ] },
+                       :prompt => t('select') + ' ' + t('glyph.self') %></td>
+    </tr>
+    <tr>
+      <td class="form_header"><%= f.label t('script.self') %></td>
+      <td><%= f.select :script_id,
+                       Script.all.collect {|p| [ p.name, p.id ] },
+                       :prompt => t('select') + ' ' + t('script.self') %></td>
+    </tr>
+    <tr>
+      <td class="form_header"><%= f.label t('sound.value') %></td>
+      <td><%= f.select(:sound_ids,
+                       Sound.all.collect {|p| [unicode_tag(p.symbol, :type => 'sound') + ', ' + p.name, p.id ] },
+                       {:selected => @char.sound_ids},
+                       {:multiple => true, :sound => 'char[sound_ids][]', :size => 8 }) %></td>
+    </tr>
+    <tr>
+      <td class="form_header"><%= f.label t('parent') %></td>
+      <td><%= f.select :parent_id,
+                 @parents_select.collect {|p| [unicode_tag(p.glyph.unicode, :type => 'glyph') + ', ' + p.name + ', ' + p.script.name, p.id ] },
+                 :include_blank => t('none') %></td>
+    </tr>
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

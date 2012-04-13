@@ -1,27 +1,6 @@
-<h1>Listing chars</h1>
+<h1><%= t('char.list') %></h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Script</th>
-    <th>Sound</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @chars.each do |char| %>
-  <tr>
-    <td><%= char.name %></td>
-    <td><%= char.script.name %></td>
-    <td><%= char.sound.symbol %></td>
-    <td><%= link_to 'Show', char %></td>
-    <td><%= link_to 'Edit', edit_char_path(char) %></td>
-    <td><%= link_to 'Destroy', char, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<%= form_tag chars_path, :method => 'get', :id => 'chars_search' do %>
+  <input id="search" type=search results=5 autosave=some_unique_value placeholder=Search... name="search">
+  <div id="chars"><%= render 'chars' %></div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Char', new_char_path %>
